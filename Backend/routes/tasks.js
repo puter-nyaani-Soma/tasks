@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-router.get('/',(req,res)=>{
-    res.send('all tasks')
-})
+const Task=require('../models/taskModel');
+const taskController = require('../controllers/taskController');
 
-router.get('/:id',(req,res)=>{
-res.send("single task")
-})
+router.get('/',taskController.get_All_Tasks);
 
-router.post('/',(req,res)=>{
-    res.send('post new task')
-})
+
+
+router.get('/:id',taskController.get_Task);
+
+router.post('/',taskController.createTask);
+    
 router.delete('/:id',(req,res)=>{
     res.send('delete  task')
 })
