@@ -31,3 +31,32 @@ module.exports.createTask = async (req,res)=>{
         res.status(400).json({error:e.message})
     }
 }
+
+module.exports.delete_Task = async (req, res) => {
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json("No task for this id (invalid)");
+    }
+    const task=await Task.findOneAndDelete({_id:id});
+    if(!task){
+       return res.status(404).json("No Task for this id (not found)");
+    }
+    res.status(200).json({task});
+
+}
+
+module.exports.update_Task=async (req, res) => {
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json("No task for this id (invalid)");
+    }
+    const task=await Task.findOneAndUpdate({_id:id},{
+       ...req.body
+
+    });
+    if(!task){
+       return res.status(404).json("No Task for this id (not found)");
+    }
+    res.status(200).json({task});
+
+}

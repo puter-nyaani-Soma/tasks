@@ -11,11 +11,7 @@ router.get('/:id',taskController.get_Task);
 
 router.post('/',taskController.createTask);
     
-router.delete('/:id',(req,res)=>{
-    res.send('delete  task')
-})
-router.patch('/:id',(req,res)=>{
-    res.send('udpate  task')
-})
+router.delete('/:id',taskController.delete_Task);
+router.patch('/:id',taskController.update_Task);
 
 module.exports = router
