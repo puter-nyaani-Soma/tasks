@@ -25,6 +25,7 @@ app.get('/',(req,res)=>{
 mongoose.connect(process.env.MONGO_URI)
 .then(
     //listen 
+    
     app.listen(process.env.PORT,() => {
         console.log(`listening on port ${process.env.PORT}`);
     })
