@@ -4,7 +4,7 @@ const Task = require('../models/taskModel');
 
 module.exports.get_All_Tasks=async (req,res)=>{
     const tasks = await Task.find().sort({created_at:-1})
-    res.status(200).json({tasks});
+    res.status(200).json(tasks);
 }
 
 module.exports.get_Task=async (req,res)=>{
@@ -16,7 +16,7 @@ module.exports.get_Task=async (req,res)=>{
     if(!task){
        return res.status(404).json("No Task for this id (not found)");
     }
-    res.status(200).json({task});
+    res.status(200).json(task);
 }
 
 
@@ -41,7 +41,7 @@ module.exports.delete_Task = async (req, res) => {
     if(!task){
        return res.status(404).json("No Task for this id (not found)");
     }
-    res.status(200).json({task});
+    res.status(200).json(task);
 
 }
 
@@ -57,6 +57,6 @@ module.exports.update_Task=async (req, res) => {
     if(!task){
        return res.status(404).json("No Task for this id (not found)");
     }
-    res.status(200).json({task});
+    res.status(200).json(task);
 
 }

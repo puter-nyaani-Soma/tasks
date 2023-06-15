@@ -6,7 +6,7 @@ const taskSchema = new Schema({
         required: true,
     },
     time:{
-        type:Number,
+        type:String,
 
     },
     description:{
