@@ -1,5 +1,8 @@
 import { useState } from "react";
+import  {useTasksContext} from '../hooks/useTasksContext'
+
 const TaskForm = () => {
+    const {dispatch}=useTasksContext();
 
     const [title,setTitle] = useState('')
     const [time,setTime] = useState('')
@@ -14,7 +17,7 @@ const TaskForm = () => {
             body:JSON.stringify(task),
             headers: {'Content-Type': 'application/json'}
         })
-        const json = await response.json();
+        const json = await response.json;
         if(!json.ok){
             setError(json.error)
 
@@ -24,7 +27,8 @@ const TaskForm = () => {
             setTime('')
             setTitle('')
             setDescription('')
-            console.log("addedtasl");
+            console.log("addedtasl"); 
+            dispatch({type:"CREATE_TASK",payload:json})
         }
     }
 
