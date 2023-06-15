@@ -2,6 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCheck, faSquare , faTrash} from '@fortawesome/free-solid-svg-icons';
 import {Link } from 'react-router-dom'
 import { useTasksContext } from '../hooks/useTasksContext';
+
+// date-fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import isAfter from 'date-fns/isAfter';
 const TaskDetails = ({task}) => {
     const {dispatch} = useTasksContext();
     const handleClick  = async (e) => {
@@ -18,8 +22,14 @@ const TaskDetails = ({task}) => {
     };
 
     return ( 
-        <div className="workout-details">
-            <h4>{task.title}</h4> <h6>{task.createdAt}</h6>
+        // eslint-disable-next-line react/jsx-no-duplicate-props
+        <div className={isAfter(new Date(),new Date(task.time))?'workout-details error':'workout-details'}>
+            <h4>{task.title}</h4> 
+            <h6>{formatDistanceToNow(new Date(task.createdAt),{addSuffix:true})}</h6>
+            {isAfter(new Date(),new Date(task.time))?<h6>Over due by {formatDistanceToNow(new Date(task.time))}</h6>:<h6>Due in {formatDistanceToNow(new Date(task.time))}</h6>}
+            
+
+            
             <p>{task.description}</p>
     
             {task.finshed &&<FontAwesomeIcon icon={faSquareCheck} style={{color:"rgb(45, 185, 131)"}} />}

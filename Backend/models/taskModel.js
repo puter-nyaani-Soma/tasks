@@ -7,16 +7,17 @@ const taskSchema = new Schema({
     },
     time:{
         type:String,
+        required:true,
 
     },
     description:{
         type:String,
     },
-    finshed:{
+    finished:{
         type: Boolean,
         default: false,
-    }
-
+    },
+   
 },{timestamps:true});
 
 module.exports = mongoose.model('Task',taskSchema);

@@ -8,6 +8,7 @@ const TaskForm = () => {
     const [time,setTime] = useState('')
     const [description,setDescription] = useState('')
     const [error,setError] = useState(null)
+    const [emptyFields,setEmptyFields] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const task={title,time,description}
@@ -17,16 +18,18 @@ const TaskForm = () => {
             body:JSON.stringify(task),
             headers: {'Content-Type': 'application/json'}
         })
-        const json = await response.json;
+        const json = await response.json();
         if(!json.ok){
             setError(json.error)
-
+            setEmptyFields(json.emptyFields);
+            
         }
         if(response.ok){
             setError(null)
             setTime('')
             setTitle('')
             setDescription('')
+            setEmptyFields([]);
             console.log("addedtasl"); 
             dispatch({type:"CREATE_TASK",payload:json})
         }
@@ -42,13 +45,17 @@ const TaskForm = () => {
             <label>
                 Task Title
             </label>
-            <input type="text" name="" id="" 
+            <input 
+            type="text" 
+
             value={title}
-            onChange={(e)=>setTitle(e.target.value)}/>
+            onChange={(e)=>setTitle(e.target.value)}
+            className={emptyFields.includes('title')?'error':''}/>
             <label>Complete by</label>
             <input type="date"
             value={time}
-            onChange={(e)=>setTime(e.target.value)}/>
+            onChange={(e)=>setTime(e.target.value)}
+            className={emptyFields.includes('time')?'error':''}/>
             <label>Description</label>
             <textarea
             value={description}

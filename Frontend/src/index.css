@@ -38,7 +38,7 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
-.workout-details {
+.workout-details  {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -63,6 +63,9 @@ header a {
   cursor: pointer;
   padding: 6px;
  
+}
+.workout-details #error{
+  background-color: #555 !important;
 }
 
 /* new workout form */
