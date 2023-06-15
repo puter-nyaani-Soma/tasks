@@ -65,10 +65,13 @@ module.exports.update_Task=async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json("No task for this id (invalid)");
     }
-    const task=await Task.findOneAndUpdate({_id:id},{
-       ...req.body
-
-    });
+    console.log(req.body);
+    const task = await Task.findOneAndUpdate(
+        { _id: id },
+        { ...req.body },
+        { new: true }
+      );
+      
     if(!task){
        return res.status(404).json("No Task for this id (not found)");
     }

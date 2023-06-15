@@ -16,6 +16,16 @@ export const tasksReducer=(state,action)=>{
             return{
                 tasks:state.tasks.filter(w=>w._id!==action.payload._id )
             }
+            case 'UPDATE_TASK':
+                return {
+                  tasks: state.tasks.map(task => {
+                    if (task._id === action.payload._id) {
+                      return action.payload; // Replace the existing task with the updated task
+                    }
+                    return task; // Keep the other tasks unchanged
+                  })
+                };
+              
         default:
             return state
         
