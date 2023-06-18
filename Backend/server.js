@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 //import routes
+const userRoutes = require('./routes/user');
 const taskRoutes = require('./routes/tasks');
 
 //middle wares
@@ -16,6 +17,7 @@ app.use(express.json())
 //routes
 
 app.use('/api/tasks',taskRoutes)
+app.use('/api/users',userRoutes)
 app.get('/',(req,res)=>{
     res.send("hi")
 })
