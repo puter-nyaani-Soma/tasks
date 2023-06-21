@@ -7,7 +7,7 @@ const handleError = ()=>{
 }
 
 module.exports.get_All_Tasks=async (req,res)=>{
-    const tasks = await Task.find().sort({created_at:-1})
+    const tasks = await Task.find({user_id:req.user_id}).sort({created_at:-1})
     res.status(200).json(tasks);
 }
 
@@ -25,7 +25,8 @@ module.exports.get_Task=async (req,res)=>{
 
 
 module.exports.createTask = async (req,res)=>{
-    const {title,time,description,finished} = req.body
+    const user_id= req.user._id
+    const {title,time,description,finished,} = req.body
     const emptyFields = []
     if(!title){
         emptyFields.push('title')
@@ -38,7 +39,7 @@ module.exports.createTask = async (req,res)=>{
     }
        
     try{
-        const task =await Task.create({title,time,description,finished})
+        const task =await Task.create({title,time,description,finished,user_id})
         res.status(200).json(task)
 
 

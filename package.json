@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "mongoose": "^7.2.4"
+  },
+  "scripts": {
+    
+    
+    "start": "cd .\\Backend\\ &&  npm run dev ",
+    "frontend": "cd .\\frontend\\ && npm start"
   }
 }

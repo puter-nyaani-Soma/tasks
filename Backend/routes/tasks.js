@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Task=require('../models/taskModel');
 const taskController = require('../controllers/taskController');
+const requireAuth = require('../middleware/requireAuth');
+
+router.use(requireAuth);
 
 router.get('/',taskController.get_All_Tasks);
 
