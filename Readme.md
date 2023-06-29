@@ -31,6 +31,10 @@ Follow these steps to get the application up and running:
    ```bash
    cd tasks
    npm install
+   cd Backend
+   npm install
+   cd Frontend
+   npm install
    ```
 
 3. Configuration:
